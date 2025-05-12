@@ -1,23 +1,54 @@
-import 'Node.dart';
 
-Node? findMiddleNode(LinkedList list) {
-  Node? slow = list.head;
-  Node? fast = list.head;
+import '../linked_list.dart';
 
-  while (fast != null && fast.next != null) {
-    slow = slow?.next;
-    fast = fast.next?.next;
+class FindMiddleNodeChallenge {
+  /// Finds the middle node of a linked list
+  /// 
+  /// Time Complexity: O(n)
+
+  static Node<E>? getMiddleNode<E>(LinkedList<E> list) {
+    if (list.head == null) return null;
+    
+    var slow = list.head;
+    var fast = list.head;
+    
+    while (fast?.next != null) {
+      slow = slow!.next;
+      fast = fast?.next?.next;
+    }
+    
+    return slow;
   }
-  return slow;
+
+  // Demonstration method
+  static void demonstrateFindMiddleNode() {
+    // Odd number of elements
+    final oddList = LinkedList<int>();
+    oddList.append(1);
+    oddList.append(2);
+    oddList.append(3);
+    oddList.append(4);
+    oddList.append(5);
+
+    print('Odd Length List:');
+    oddList.printList();
+    final oddMiddle = getMiddleNode(oddList);
+    print('Middle Node: ${oddMiddle?.value}\n');
+
+    // Even number of elements
+    final evenList = LinkedList<int>();
+    evenList.append(1);
+    evenList.append(2);
+    evenList.append(3);
+    evenList.append(4);
+
+    print('Even Length List:');
+    evenList.printList();
+    final evenMiddle = getMiddleNode(evenList);
+    print('Middle Node: ${evenMiddle?.value}');
+  }
 }
 
 void main() {
-  var list = LinkedList<int>();
-  list.append(1);
-  list.append(2);
-  list.append(3);
-  list.append(4);
-  list.append(5);
-
-  print(findMiddleNode(list)?.value); 
+  FindMiddleNodeChallenge.demonstrateFindMiddleNode();
 }
