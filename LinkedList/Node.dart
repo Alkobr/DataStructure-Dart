@@ -1,25 +1,31 @@
+// lib/linked_list/linked_list.dart
 class Node<T> {
   T value;
   Node<T>? next;
-
-  Node(this.value);
+  
+  Node(this.value, [this.next]);
 }
 
-class LinkedList<T> {
-  Node<T>? head;
-
-  void append(T value) {
+class LinkedList<E> {
+  Node<E>? head;
+  
+  // Add element to the end of the list
+  void append(E value) {
+    final newNode = Node(value);
+    
     if (head == null) {
-      head = Node(value);
+      head = newNode;
       return;
     }
+    
     var current = head;
-    while (current?.next != null) {
-      current = current?.next;
+    while (current!.next != null) {
+      current = current.next;
     }
-    current?.next = Node(value);
+    current.next = newNode;
   }
-
+  
+  // Utility method to print the list
   void printList() {
     var current = head;
     while (current != null) {
